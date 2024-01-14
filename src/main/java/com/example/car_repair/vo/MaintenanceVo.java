@@ -8,16 +8,16 @@ public class MaintenanceVo {
 
     int id;
 
-    String maintenanceId;
-
     String name;
 
     String phone;
+
+    String age;
 
     public MaintenanceVo(Maintenance maintenance) {
         this.id = maintenance.getId();
         this.name = maintenance.getName();
         this.phone = maintenance.getPhone();
-        this.maintenanceId = maintenance.getMaintenanceId();
+        this.age = maintenance.getAge();
     }
 }

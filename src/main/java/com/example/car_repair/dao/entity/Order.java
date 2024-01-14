@@ -20,6 +20,10 @@ public class Order extends Model<Order> {
     // 用户表的ID
     String userid;
 
+    @TableField(value = "maintenanceProject")
+    // 维修项目
+    String maintenanceProject;
+
     // 问题描述
     String problem;
 
@@ -27,6 +31,11 @@ public class Order extends Model<Order> {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT + 8")
     // 下单时间
     Timestamp orderTime;
+
+    @TableField(value = "orderDate")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT + 8")
+    // 预约时间
+    Timestamp orderDate;
 
     @TableField(value = "maintenanceTime")
     // 接单时间
@@ -36,9 +45,8 @@ public class Order extends Model<Order> {
     // 完成时间
     Time finishTime;
 
-    @TableField(value = "maintenanceId")
     // 维修员
-    String maintenanceId;
+    String maintenance;
 
     // 订单状态 0-待分配维修人员，1-正在维修， 2-维修完成
     int status = 0;

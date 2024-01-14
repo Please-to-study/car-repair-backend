@@ -2,6 +2,7 @@ package com.example.car_repair.dao.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
+import com.sun.tools.javac.Main;
 import lombok.Data;
 
 @Data
@@ -9,14 +10,12 @@ public class Maintenance extends Model<Maintenance> {
 
     int id;
 
-    @TableField(value = "maintenanceId")
-    String maintenanceId;
-
     String name;
 
     String phone;
 
-    String password;
+    // 年龄
+    String age;
 
     // 删除标志：1已删除，0未删除
     @TableField(value = "deleteFlag")
@@ -27,9 +26,11 @@ public class Maintenance extends Model<Maintenance> {
 
     }
 
-    public Maintenance(Maintenance maintenance) {
+    public Maintenance copy(Maintenance maintenance) {
         this.name = maintenance.getName();
         this.phone = maintenance.getPhone();
+        this.age = maintenance.getAge();
         this.deleteFlag = maintenance.getDeleteFlag();
+        return this;
     }
 }

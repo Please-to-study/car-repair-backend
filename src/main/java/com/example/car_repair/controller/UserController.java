@@ -11,11 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
-import java.net.http.HttpRequest;
-
 @RestController
 @AllArgsConstructor
+@CrossOrigin(origins = {"http://localhost:3000", "http://localhost:8080"})
 public class UserController {
 
     private final IUserService userService;

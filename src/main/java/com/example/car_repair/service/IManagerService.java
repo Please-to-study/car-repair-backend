@@ -8,5 +8,7 @@ public interface IManagerService extends IService<Manager> {
 
     public Result login(String managerId, String password);
 
-    public Result assignOrder(Integer orderId, String maintenanceId);
+    public Result assignOrder(Integer orderId, String phone);
+
+    public Result assignStatus(Integer orderId, Integer status);
 }

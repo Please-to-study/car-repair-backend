@@ -12,4 +12,9 @@ public interface IOrderService extends IService<Order> {
 
     public Result comment(Order order);
 
+    // 获取所有的订单
+    public Result getAllOrder(String userid);
+
+    // 获取所有未分配维修人员的订单
+    public Result getNoAssign();
 }

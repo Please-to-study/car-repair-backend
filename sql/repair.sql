@@ -14,26 +14,27 @@ create table repair.user
 -- 维修员表
 create table repair.maintenance
 (
-    id            int auto_increment primary key,
-    maintenanceId varchar(16)  not null,
-    name          varchar(255) not null,
-    phone         varchar(11)  not null,
-    password      varchar(32)  not null,
-    deleteFlag    int          not null
+    id         int auto_increment primary key,
+    name       varchar(255) not null,
+    phone      varchar(11)  not null,
+    age        varchar(3)   not null,
+    deleteFlag int          not null
 );
 
 -- 订单表
 create table repair.order
 (
-    id              int auto_increment primary key,
-    userid          varchar(16) not null,
-    problem         longtext    not null,
-    orderTime       datetime    not null,
-    maintenanceTime datetime,
-    finishTime      datetime,
-    maintenanceId   varchar(16),
-    status          int         not null,
-    comment         longtext
+    id                 int auto_increment primary key,
+    userid             varchar(16) not null,
+    problem            longtext    not null,
+    maintenanceProject varchar(20) not null,
+    orderTime          datetime    not null,
+    orderDate          datetime    not null,
+    maintenanceTime    datetime,
+    finishTime         datetime,
+    maintenance        varchar(16),
+    status             int         not null,
+    comment            longtext
 
 );
 
