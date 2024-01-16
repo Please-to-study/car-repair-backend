@@ -17,4 +17,10 @@ public interface IOrderService extends IService<Order> {
 
     // 获取所有未分配维修人员的订单
     public Result getNoAssign();
+
+    // 获取所有完成的订单
+    public Result getAllFinish();
+
+    //获取所有未完成的订单
+    public Result getAllNoFinish();
 }

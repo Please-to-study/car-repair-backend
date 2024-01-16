@@ -11,6 +11,9 @@ import com.example.car_repair.util.Result;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+
 @Service
 @AllArgsConstructor
 public class ManagerServiceImpl extends ServiceImpl<ManagerMapper, Manager> implements IManagerService {
@@ -42,7 +45,14 @@ public class ManagerServiceImpl extends ServiceImpl<ManagerMapper, Manager> impl
         if (!orderRes.isSuccess()) return orderRes;
 
         Order order = (Order) orderRes.getData();
+        // 分配人员
         order.setMaintenance(phone);
+
+        LocalDateTime dateTime = LocalDateTime.now();
+        // 时间
+        order.setMaintenanceTime(Timestamp.valueOf(dateTime));
+        // 状态
+        order.setStatus(1);
 
         boolean ok = orderService.updateById(order);
         if (!ok) return Result.errorMsg("分配维修员失败");
@@ -56,7 +66,26 @@ public class ManagerServiceImpl extends ServiceImpl<ManagerMapper, Manager> impl
         if (!result.isSuccess()) return Result.errorMsg("没有找到对应的订单");
 
         Order order = (Order) result.getData();
+
+        LocalDateTime dateTime = LocalDateTime.now();
+
+        switch (order.getStatus()) {
+            case 0:
+                if (status == 0) return Result.errorMsg("订单已在待分配维修人员状态");
+                if (status == 2) return Result.errorMsg("订单还未分配维修人员，无法直接完成");
+                order.setMaintenanceTime(Timestamp.valueOf(dateTime));
+                break;
+            case 1:
+                if (status == 0) return Result.errorMsg("订单已在维修中");
+                if (status == 1) return Result.errorMsg("订单已在维修中");
+                order.setFinishTime(Timestamp.valueOf(dateTime));
+                break;
+            case 2:
+                return Result.errorMsg("订单已完成，无法修改状态");
+        }
+
         order.setStatus(status);
+
         boolean ok = orderService.updateById(order);
 
         if (!ok) return Result.errorMsg("修改订单状态失败");

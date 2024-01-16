@@ -2,16 +2,20 @@ package com.example.car_repair.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.example.car_repair.dao.entity.Maintenance;
 import com.example.car_repair.dao.entity.Order;
 import com.example.car_repair.dao.mapper.OrderMapper;
+import com.example.car_repair.service.IMaintenanceService;
 import com.example.car_repair.service.IOrderService;
 import com.example.car_repair.service.IUserService;
 import com.example.car_repair.util.Result;
+import com.example.car_repair.vo.OrderVo;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -19,6 +23,8 @@ import java.util.List;
 public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements IOrderService {
 
     IUserService userService;
+
+    IMaintenanceService maintenanceService;
 
     @Override
     public Result booking(Order order) {
@@ -73,6 +79,34 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
     public Result getNoAssign() {
         QueryWrapper<Order> wrapper = new QueryWrapper<>();
         wrapper.isNull("maintenance");
+        List<Order> res = this.list(wrapper);
+        return Result.ok(res);
+    }
+
+    @Override
+    public Result getAllFinish() {
+        QueryWrapper<Order> wrapper = new QueryWrapper<>();
+        wrapper.eq("status", 2);
+        List<Order> res = this.list(wrapper);
+
+        List<OrderVo> result = new ArrayList<>();
+
+        for (Order order : res) {
+            String phone = order.getMaintenance();
+            Result temp = maintenanceService.getMaintenanceByPhone(phone);
+            if (!temp.isSuccess()) return Result.errorMsg(temp.getMsg());
+            OrderVo orderVo = new OrderVo(order);
+            orderVo.setMaintenance((Maintenance) temp.getData());
+            result.add(orderVo);
+        }
+
+        return Result.ok(result);
+    }
+
+    @Override
+    public Result getAllNoFinish() {
+        QueryWrapper<Order> wrapper = new QueryWrapper<>();
+        wrapper.ne("status", 2);
         List<Order> res = this.list(wrapper);
         return Result.ok(res);
     }

@@ -82,5 +82,26 @@ public class OrderController {
         return JSONResult.ok(result.getData());
     }
 
+    @RequestMapping(value = "/getAllFinish", method = RequestMethod.GET)
+    public JSONResult getAllFinish(String managerId) {
 
+//        if (managerId == null) return JSONResult.errorMsg("只有管理员才能使用该功能");
+
+        Result result = orderService.getAllFinish();
+        if (!result.isSuccess()) return JSONResult.errorMsg(result.getMsg());
+
+        return JSONResult.ok(result.getData());
+    }
+
+    @RequestMapping(value = "/getAllNoFinish", method = RequestMethod.GET)
+    public JSONResult getAllNoFinish(String managerId) {
+
+
+//        if (managerId == null) return JSONResult.errorMsg("只有管理员才能使用该功能");
+
+        Result result = orderService.getAllNoFinish();
+        if (!result.isSuccess()) return JSONResult.errorMsg(result.getMsg());
+
+        return JSONResult.ok(result.getData());
+    }
 }
