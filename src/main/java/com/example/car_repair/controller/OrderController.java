@@ -28,6 +28,8 @@ public class OrderController {
             return JSONResult.errorMsg("维修类别不能为空");
         if (order.getOrderDate() == null)
             return JSONResult.errorMsg("预约时间不能为空");
+        if (order.getPhone() == null)
+            return JSONResult.errorMsg("预留电话不能为空");
 
         Result result = orderService.booking(order);
         if (!result.isSuccess()) return JSONResult.errorMsg(result.getMsg());

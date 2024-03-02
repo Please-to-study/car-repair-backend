@@ -45,6 +45,12 @@ public class OrderVo {
     // 评论
     String comment;
 
+    String phone;
+
+    String plateNumber;
+
+    String model;
+
     public OrderVo(Order order) {
         this.id = order.getId();
         this.comment = order.getComment();
@@ -55,5 +61,8 @@ public class OrderVo {
         this.status = order.getStatus();
         this.userid = order.getUserid();
         this.maintenanceProject = order.getMaintenanceProject();
+        this.phone = order.getPhone();
+        this.plateNumber = order.getPlateNumber();
+        this.model = order.getModel();
     }
 }

@@ -11,4 +11,8 @@ public interface IManagerService extends IService<Manager> {
     public Result assignOrder(Integer orderId, String phone);
 
     public Result assignStatus(Integer orderId, Integer status);
+
+    public Result register(Manager manager);
+
+    public Result getManager(String managerId);
 }

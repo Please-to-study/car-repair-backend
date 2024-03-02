@@ -21,6 +21,12 @@ public class Maintenance extends Model<Maintenance> {
     @TableField(value = "deleteFlag")
     Integer deleteFlag = 0;
 
+    // 主修项目
+    String major;
+
+    // 工龄
+    String seniority;
+
     // 无参构造
     public Maintenance() {
 

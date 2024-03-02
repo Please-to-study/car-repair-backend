@@ -14,10 +14,16 @@ public class MaintenanceVo {
 
     String age;
 
+    String seniority;
+
+    String major;
+
     public MaintenanceVo(Maintenance maintenance) {
         this.id = maintenance.getId();
         this.name = maintenance.getName();
         this.phone = maintenance.getPhone();
         this.age = maintenance.getAge();
+        this.seniority = maintenance.getSeniority();
+        this.major = maintenance.getMajor();
     }
 }

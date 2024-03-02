@@ -18,7 +18,10 @@ create table repair.maintenance
     name       varchar(255) not null,
     phone      varchar(11)  not null,
     age        varchar(3)   not null,
-    deleteFlag int          not null
+    deleteFlag int          not null,
+
+    major      varchar(255),
+    seniority  varchar(3)
 );
 
 -- 订单表
@@ -34,7 +37,11 @@ create table repair.order
     finishTime         datetime,
     maintenance        varchar(16),
     status             int         not null,
-    comment            longtext
+    comment            longtext,
+
+    phone              varchar(11),
+    model              varchar(20),
+    plateNumber        varchar(20)
 
 );
 
@@ -43,4 +50,14 @@ create table repair.manager
 (
     managerId varchar(16) not null,
     password  varchar(32) not null
+);
+
+
+create table repair.board
+(
+    id         int auto_increment primary key,
+    context    text        not null,
+    title      varchar(32) not null,
+    time       datetime    not null,
+    deleteFlag int         not null
 );

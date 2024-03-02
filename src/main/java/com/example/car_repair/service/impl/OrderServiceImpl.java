@@ -36,6 +36,9 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
         newOrder.setProblem(order.getProblem());
         newOrder.setMaintenanceProject(order.getMaintenanceProject());
         newOrder.setOrderDate(order.getOrderDate());
+        newOrder.setPlateNumber(order.getPlateNumber());
+        newOrder.setModel(order.getModel());
+        newOrder.setPhone(order.getPhone());
 
         LocalDateTime dateTime = LocalDateTime.now();
         newOrder.setOrderTime(Timestamp.valueOf(dateTime));

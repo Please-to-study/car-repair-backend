@@ -1,14 +1,17 @@
 package com.example.car_repair.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.car_repair.dao.entity.Manager;
 import com.example.car_repair.dao.entity.Order;
+import com.example.car_repair.dao.entity.User;
 import com.example.car_repair.dao.mapper.ManagerMapper;
 import com.example.car_repair.service.IMaintenanceService;
 import com.example.car_repair.service.IManagerService;
 import com.example.car_repair.service.IOrderService;
 import com.example.car_repair.util.Result;
 import lombok.AllArgsConstructor;
+import org.springframework.jmx.export.naming.MetadataNamingStrategy;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
@@ -90,5 +93,26 @@ public class ManagerServiceImpl extends ServiceImpl<ManagerMapper, Manager> impl
 
         if (!ok) return Result.errorMsg("修改订单状态失败");
         return Result.ok("修改订单状态成功");
+    }
+
+    @Override
+    public Result register(Manager manager) {
+        Result res = getManager(manager.getManagerId());
+        if(res.isSuccess()) return Result.errorMsg("管理员已存在");
+
+        boolean ok = save(manager);
+        if (!ok) return Result.errorMsg("创建管理员失败");
+
+        return Result.ok("创建管理员成功");
+    }
+
+    @Override
+    public Result getManager(String managerId) {
+        QueryWrapper<Manager> wrapper = new QueryWrapper<>();
+        wrapper.eq("managerId", managerId).last("limit 1");
+        Manager manager = getOne(wrapper, false);
+        if (manager == null) return Result.errorMsg("没有找到管理员");
+
+        return Result.ok(manager);
     }
 }

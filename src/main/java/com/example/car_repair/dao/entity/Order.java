@@ -54,4 +54,14 @@ public class Order extends Model<Order> {
     // 评论
     String comment;
 
+    // 电话号码
+    String phone;
+
+    // 车牌
+    @TableField(value = "plateNumber")
+    String plateNumber;
+
+    // 车型号
+    String model;
+
 }
