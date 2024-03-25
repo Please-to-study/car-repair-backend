@@ -109,7 +109,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
     @Override
     public Result getAllNoFinish() {
         QueryWrapper<Order> wrapper = new QueryWrapper<>();
-        wrapper.ne("status", 2);
+        wrapper.eq("status", 1);
         List<Order> res = this.list(wrapper);
         return Result.ok(res);
     }

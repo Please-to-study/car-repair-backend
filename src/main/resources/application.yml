@@ -1,9 +1,9 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3307/repair
+    url: jdbc:mysql://localhost:3306/repair
     username: root
-    password: 123456
+    password: 1q2w3e4R
 
 # 打印sql语句
 mybatis-plus:

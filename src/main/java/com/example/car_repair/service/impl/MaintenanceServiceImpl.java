@@ -32,7 +32,8 @@ public class MaintenanceServiceImpl extends ServiceImpl<MaintenanceMapper, Maint
         Maintenance old = getOne(wrapper);
         if (old == null) return Result.errorMsg("维修人员不存在");
 
-        Maintenance newMaintenance = old.copy(maintenance);
+//        Maintenance newMaintenance = old.copy(maintenance);
+        Maintenance newMaintenance = maintenance;
 
         boolean ok = update(newMaintenance, wrapper);
         if (!ok) return Result.errorMsg("修改维修员信息失败");
